@@ -11,6 +11,9 @@ module.exports =
 
   consumeToolBar: (toolBar) ->
 
+    if atom.config.get('nsis-ide.disableToolbar') is true
+      return
+
     switch os.platform()
       when 'win32'
         fileManager = 'Explorer'
@@ -42,3 +45,5 @@ module.exports =
         callback: 'browse:reveal-file'
         tooltip: "Show in #{fileManager}"
         iconset: 'ion'
+
+    @toolBar.addSpacer()
