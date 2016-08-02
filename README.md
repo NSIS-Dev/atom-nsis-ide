@@ -41,13 +41,20 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
 
 ## Features
 
-* [`language-nsis`](https://atom.io/packages/language-nsis) – language grammar for NSIS
-* [`language-nlf`](https://atom.io/packages/language-nlf) – language grammar for NSIS Language Files
-* [`language-nsl`](https://atom.io/packages/language-nsl) – language grammar for nsL Assembler
-* [`build-makensis`](https://atom.io/packages/build-makensis) – build provider for `makensis`
-* [`build-nsl`](https://atom.io/packages/build-nsl) – build provider for `nsL.jar`
-* auto-completion and snippets
-* code linting
+* NSIS
+    * language grammar
+    * auto-complete
+    * snippets
+    * build tools
+    * linter
+* NSIS Language Files
+    * language grammar
+    * snippets
+* nsL Assembler
+    * language grammar
+    * auto-complete
+    * snippets
+    * build tools
 
 ## License
 
