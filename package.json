@@ -1,0 +1,63 @@
+{
+  "name": "nsis-ide",
+  "version": "0.0.0",
+  "description": "Adds IDE-like features for NSIS development in Atom",
+  "license": "MIT OR GPL-2.0",
+  "main": "./lib/nsis-ide",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NSIS-Dev/atom-nsis-ide"
+  },
+  "keywords": [
+    "nsis",
+    "nullsoft",
+    "installer",
+    "setup",
+    "windows",
+    "build",
+    "build tool",
+    "compiler",
+    "grammar",
+    "language syntax",
+    "ide"
+  ],
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "package-deps": [
+    "build",
+    "build-makensis",
+    "build-nsl",
+    "language-nlf",
+    "language-nsis",
+    "language-nsl",
+    "linter",
+    "nsis-plugins",
+    "tool-bar"
+  ],
+  "consumedServices": {
+    "tool-bar": {
+      "versions": {
+        "^0 || ^1": "consumeToolBar"
+      }
+    }
+  },
+  "dependencies": {
+    "atom-package-deps": "^4.0.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^6.1.2",
+    "eslint": "^3.1.1",
+    "eslint-config-atom-build": "^4.0.0",
+    "gulp": "^3.9.1",
+    "gulp-coffeelint": "^0.6.0",
+    "gulp-debug": "^2.1.2",
+    "gulp-jshint": "^2.0.1",
+    "gulp-jsonlint": "^1.1.2",
+    "gulp-lesshint": "^2.0.0",
+    "jshint": "^2.9.2"
+  },
+  "scripts": {
+    "test": "gulp lint"
+  }
+}
