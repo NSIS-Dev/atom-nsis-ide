@@ -32,6 +32,8 @@
     "language-nsis",
     "language-nsl",
     "linter",
+    "minimap",
+    "minimap-linter",
     "nsis-plugins",
     "tool-bar"
   ],
