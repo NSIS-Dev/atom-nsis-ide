@@ -14,12 +14,12 @@ module.exports =
       type: 'boolean'
       default: true
     showFileButtons:
-      title: "Show File Buttons"
+      title: "Show File Tools"
       description: "Displays buttons for `Load` / `Save`"
       type: 'boolean'
       default: true
     showHistoryButtons:
-      title: "Show Build Tools"
+      title: "Show History Tools"
       description: "Displays buttons for `Undo` / `Redo`"
       type: 'boolean'
       default: true
