@@ -2,13 +2,40 @@ meta = require '../package.json'
 os = require 'os'
 
 module.exports =
+  config:
+    disableToolbar:
+      title: "Disable Toolbar"
+      description: "Hides the toolbar altogether"
+      type: 'boolean'
+      default: false
+    showBuildTools:
+      title: "Show Build Tools"
+      description: "Displays buttons to build NSIS scripts"
+      type: 'boolean'
+      default: true
+    showFileButtons:
+      title: "Show File Buttons"
+      description: "Displays buttons for `Load` / `Save`"
+      type: 'boolean'
+      default: true
+    showHistoryButtons:
+      title: "Show Build Tools"
+      description: "Displays buttons for `Undo` / `Redo`"
+      type: 'boolean'
+      default: true
+    showClipboardButtons:
+      title: "Show Clipboard Tools"
+      description: "Displays buttons for `Cut` / `Copy` / `Paste`"
+      type: 'boolean'
+      default: false
+    showInfoButtons:
+      title: "Show Info Tools"
+      description: "Displays buttons to show `makensis` version and to reveal file"
+      type: 'boolean'
+      default: true
 
   activate: (state) ->
-    # Install dependencies
     require('atom-package-deps').install(meta.name)
-
-    # Write default config
-    @defaultConfig()
 
   deactivate: ->
     @toolBar?.removeItems()
@@ -114,23 +141,3 @@ module.exports =
           iconset: 'fa'
 
         @toolBar.addSpacer()
-
-  defaultConfig: ->
-
-    unless atom.config.get('nsis-ide.disableToolbar')?
-      atom.config.set('nsis-ide.disableToolbar', false)
-
-    unless atom.config.get('nsis-ide.showBuildTools')?
-      atom.config.set('nsis-ide.showBuildTools', true)
-
-    unless atom.config.get('nsis-ide.showClipboardButtons')?
-      atom.config.set('nsis-ide.showClipboardButtons', false)
-
-    unless atom.config.get('nsis-ide.showFileButtons')?
-      atom.config.set('nsis-ide.showFileButtons', true)
-
-    unless atom.config.get('nsis-ide.showHistoryButtons')?
-      atom.config.set('nsis-ide.showHistoryButtons', true)
-
-    unless atom.config.get('nsis-ide.showInfoButtons')?
-      atom.config.set('nsis-ide.showInfoButtons', true)
