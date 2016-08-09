@@ -56,6 +56,20 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
     * snippets
     * build tools
 
+## Settings
+
+The toolbar can be fully configured through your Atom [configuration](http://flight-manual.atom.io/using-atom/sections/basic-customization/#_global_configuration_settings):
+
+```cson
+"nsis-ide":
+  disableToolbar: false
+  showBuildTools: true
+  showClipboardButtons: false
+  showFileButtons: true
+  showHistoryButtons: true
+  showInfoButtons: true
+```
+
 ## License
 
 This work is dual-licensed under [The MIT License](https://opensource.org/licenses/MIT) and the [GNU General Public License, version 2.0](https://opensource.org/licenses/GPL-2.0)
