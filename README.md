@@ -39,7 +39,7 @@ $ git clone https://github.com/NSIS-Dev/atom-nsis-ide nsis-ide
 
 This package makes use of [atom-package-deps](https://github.com/steelbrain/package-deps) to automatically install additional packages it depends on. However, you *might* have to restart Atom in order to use them.
 
-## Features
+## Components
 
 * NSIS
     * language grammar
@@ -55,20 +55,6 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
     * auto-complete
     * snippets
     * build tools
-
-## Settings
-
-The toolbar can be fully configured through your Atom [configuration](http://flight-manual.atom.io/using-atom/sections/basic-customization/#_global_configuration_settings):
-
-```cson
-"nsis-ide":
-  disableToolbar: false
-  showBuildTools: true
-  showClipboardButtons: false
-  showFileButtons: true
-  showHistoryButtons: true
-  showInfoButtons: true
-```
 
 ## License
 
