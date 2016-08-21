@@ -1,48 +1,102 @@
 meta = require '../package.json'
+compare = require('compare-versions')
 os = require 'os'
 
 module.exports =
+  components: [
+    "build-makensis",
+    "build-nsl",
+    "language-nlf",
+    "language-nsl",
+    "nsis-plugins"
+  ]
   config:
-    disableToolbar:
-      title: "Disable Toolbar"
-      description: "Hides the toolbar altogether"
-      type: 'boolean'
-      default: false
-    showBuildTools:
-      title: "Show Build Tools"
-      description: "Displays buttons to build NSIS scripts"
-      type: 'boolean'
-      default: true
-    showFileButtons:
-      title: "Show File Tools"
-      description: "Displays buttons for `Load` / `Save`"
-      type: 'boolean'
-      default: true
-    showHistoryButtons:
-      title: "Show History Tools"
-      description: "Displays buttons for `Undo` / `Redo`"
-      type: 'boolean'
-      default: true
-    showClipboardButtons:
-      title: "Show Clipboard Tools"
-      description: "Displays buttons for `Cut` / `Copy` / `Paste`"
-      type: 'boolean'
-      default: false
-    showInfoButtons:
-      title: "Show Info Tools"
-      description: "Displays buttons to show `makensis` version and to reveal file"
-      type: 'boolean'
-      default: true
+    components:
+      type: "object"
+      properties:
+        toolbar:
+          title: "Enable toolbar"
+          description: "Display toolbar with NSIS helpers"
+          order: 1
+          type: 'boolean'
+          default: true
+        "nsis-plugins":
+          title: "Enable nsis-plugins"
+          description: "Snippets for third-party plug-ins"
+          type: 'boolean'
+          default: true
+          order: 2
+        "language-nlf":
+          title: "Enable language-nlf"
+          description: "Support for NSIS Language Files (NLF)"
+          type: 'boolean'
+          default: true
+          order: 3
+        "language-nsl":
+          title: "Enable language-nsl"
+          description: "Support for [nsL Assembler](https://sourceforge.net/projects/nslassembler/)"
+          type: 'boolean'
+          default: true
+          order: 4
+        "build-makensis":
+          title: "Enable build-makensis"
+          description: "Build provider for `makensis`, builds NSIS scripts"
+          type: 'boolean'
+          default: true
+          order: 5
+        "build-nsl":
+          title: "Enable build-nsl"
+          description: "Build provider for `nsL.jar`, builds [nsL Assembler](https://sourceforge.net/projects/nslassembler/)"
+          type: 'boolean'
+          default: true
+          order: 6
+    toolbar:
+      type: "object"
+      properties:
+        showBuildTools:
+          title: "Show Build Tools"
+          description: "Displays buttons to build NSIS scripts"
+          type: 'boolean'
+          default: true
+        showFileButtons:
+          title: "Show File Tools"
+          description: "Displays buttons for `Load` / `Save`"
+          type: 'boolean'
+          default: true
+        showHistoryButtons:
+          title: "Show History Tools"
+          description: "Displays buttons for `Undo` / `Redo`"
+          type: 'boolean'
+          default: true
+        showClipboardButtons:
+          title: "Show Clipboard Tools"
+          description: "Displays buttons for `Cut` / `Copy` / `Paste`"
+          type: 'boolean'
+          default: false
+        showInfoButtons:
+          title: "Show Info Tools"
+          description: "Displays buttons to show `makensis` version and to reveal file"
+          type: 'boolean'
+          default: true
 
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
+    
+    @migrateSettings() unless compare(meta.version, '0.3.0') is 1
+    @adjustSettings()
+
+    atom.config.onDidChange "#{meta.name}.components.build-makensis", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-makensis')
+    atom.config.onDidChange "#{meta.name}.components.build-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-nsl')
+    atom.config.onDidChange "#{meta.name}.components.language-nlf", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nlf')
+    atom.config.onDidChange "#{meta.name}.components.language-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nsl')
+    atom.config.onDidChange "#{meta.name}.components.nsis-plugins", ({newValue, oldValue}) => @toggleComponents(newValue, 'nsis-plugins')
+    atom.config.onDidChange "#{meta.name}.components.toolbar", ({newValue, oldValue}) => @toggleComponents(newValue, 'toolbar')
 
   deactivate: ->
     @toolBar?.removeItems()
 
   consumeToolBar: (toolBar) ->
-
-    if atom.config.get('nsis-ide.disableToolbar') is true
+    unless atom.config.get("#{meta.name}.components.toolbar")
       return
 
     switch os.platform()
@@ -53,9 +107,9 @@ module.exports =
       else
         fileManager = 'file manager'
 
-    @toolBar = toolBar 'nsis-ide'
+    @toolBar = toolBar "#{meta.name}"
 
-    if atom.packages.loadedPackages['build-makensis'] and atom.config.get('nsis-ide.showBuildTools') isnt false
+    if atom.packages.loadedPackages['build-makensis'] and atom.config.get("#{meta.name}.toolbar.showBuildTools")
       @toolBar.addButton
         icon: 'paper-plane'
         callback: 'makensis:compile'
@@ -70,7 +124,7 @@ module.exports =
 
       @toolBar.addSpacer()
 
-    if atom.config.get('nsis-ide.showFileButtons') isnt false
+    if atom.config.get("#{meta.name}.toolbar.showFileButtons")
 
       @toolBar.addButton
         icon: 'folder-open-o'
@@ -86,7 +140,7 @@ module.exports =
 
       @toolBar.addSpacer()
 
-    if atom.config.get('nsis-ide.showHistoryButtons') isnt false
+    if atom.config.get("#{meta.name}.toolbar.showHistoryButtons")
 
       @toolBar.addButton
         icon: 'step-backward'
@@ -102,7 +156,7 @@ module.exports =
 
       @toolBar.addSpacer()
 
-    if atom.config.get('nsis-ide.showClipboardButtons') isnt false
+    if atom.config.get("#{meta.name}.toolbar.showClipboardButtons")
 
       @toolBar.addButton
         icon: 'scissors'
@@ -124,7 +178,7 @@ module.exports =
 
       @toolBar.addSpacer()
 
-    if atom.config.get('nsis-ide.showInfoButtons') isnt false
+    if atom.config.get("#{meta.name}.toolbar.showInfoButtons")
 
       if atom.packages.loadedPackages['browse']
           @toolBar.addButton
@@ -141,3 +195,34 @@ module.exports =
           iconset: 'fa'
 
         @toolBar.addSpacer()
+
+
+  adjustSettings: () ->
+    for component in @components
+      if atom.packages.isPackageDisabled(component)
+        atom.config.set("#{meta.name}.components.#{component}", false)
+      else
+        atom.config.unset("#{meta.name}.components.#{component}")
+
+  toggleComponents: (enabling, component) ->
+    if component is 'toolbar'
+      atom.notifications.addWarning("Please reload the Atom window for the changes to take effect", dismissable: false)
+      return
+
+    if enabling
+      atom.notifications.addSuccess("Enabling `#{component}` package", dismissable: false)
+      atom.packages.enablePackage(component)
+    else
+      atom.notifications.addWarning("Disabling `#{component}` package", dismissable: false)
+      atom.packages.disablePackage(component)
+
+  migrateSettings: () ->
+    settings = [ 'showBuildTools', 'showFileButtons', 'showHistoryButtons', 'showClipboardButtons', 'showInfoButtons' ]
+
+    atom.config.unset("#{meta.name}.disableToolbar")
+
+    for setting in settings
+      if atom.config.get("#{meta.name}.#{setting}")?
+        console.log "Migrating #{setting} setting"
+        atom.config.set("#{meta.name}.toolbar.#{setting}", atom.config.get("#{meta.name}.#{setting}"))
+        atom.config.unset("#{meta.name}.#{setting}")
