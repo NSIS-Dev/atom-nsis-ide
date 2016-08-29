@@ -198,10 +198,11 @@ module.exports =
 
   adjustSettings: () ->
     for component in @components
-      if atom.packages.isPackageDisabled(component)
+      if atom.packages.isPackageDisabled(component) and atom.config.get("#{meta.name}.components.#{component}") is true
         atom.config.set("#{meta.name}.components.#{component}", false)
-      else
+      else if atom.packages.isPackageActive(component) and atom.config.get("#{meta.name}.components.#{component}") isnt false
         atom.config.unset("#{meta.name}.components.#{component}")
+        atom.packages.enablePackage(component)
 
   toggleComponents: (enabling, component) ->
     if component is 'toolbar'
