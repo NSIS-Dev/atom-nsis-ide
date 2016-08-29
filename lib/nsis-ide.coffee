@@ -16,7 +16,7 @@ module.exports =
       properties:
         toolbar:
           title: "Enable toolbar"
-          description: "Display toolbar with NSIS helpers"
+          description: "Displays a toolbar with useful NSIS actions"
           order: 1
           type: 'boolean'
           default: true
@@ -196,7 +196,6 @@ module.exports =
 
         @toolBar.addSpacer()
 
-
   adjustSettings: () ->
     for component in @components
       if atom.packages.isPackageDisabled(component)
@@ -206,8 +205,19 @@ module.exports =
 
   toggleComponents: (enabling, component) ->
     if component is 'toolbar'
-      atom.notifications.addWarning("Please reload the Atom window for the changes to take effect", dismissable: false)
-      return
+      if enabling
+        toggleVerb = "Enabling"
+      else
+        toggleVerb = "Disabling"
+
+      atom.confirm
+        message: "nsis-ide"
+        detailedMessage: "#{toggleVerb} the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
+        buttons:
+          "Reload Window": ->
+            atom.reload()
+          "Cancel": ->
+            return
 
     if enabling
       atom.notifications.addSuccess("Enabling `#{component}` package", dismissable: false)
