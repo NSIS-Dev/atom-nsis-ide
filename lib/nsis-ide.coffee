@@ -81,8 +81,6 @@ module.exports =
 
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
-    
-    @migrateSettings() unless compare(meta.version, '0.3.0') is 1
     @adjustSettings()
 
     atom.config.onDidChange "#{meta.name}.components.build-makensis", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-makensis')
@@ -226,14 +224,3 @@ module.exports =
     else
       atom.notifications.addWarning("Disabling `#{component}` package", dismissable: false)
       atom.packages.disablePackage(component)
-
-  migrateSettings: () ->
-    settings = [ 'showBuildTools', 'showFileButtons', 'showHistoryButtons', 'showClipboardButtons', 'showInfoButtons' ]
-
-    atom.config.unset("#{meta.name}.disableToolbar")
-
-    for setting in settings
-      if atom.config.get("#{meta.name}.#{setting}")?
-        console.log "Migrating #{setting} setting"
-        atom.config.set("#{meta.name}.toolbar.#{setting}", atom.config.get("#{meta.name}.#{setting}"))
-        atom.config.unset("#{meta.name}.#{setting}")
