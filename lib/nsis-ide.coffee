@@ -16,7 +16,7 @@ module.exports =
       properties:
         toolbar:
           title: "Enable toolbar"
-          description: "Displays a toolbar with useful NSIS actions"
+          description: "Displays a toolbar with useful NSIS actions, can be tweaked in the Toolbar settings below"
           order: 1
           type: 'boolean'
           default: true
@@ -46,7 +46,7 @@ module.exports =
           order: 5
         "build-nsl":
           title: "Enable build-nsl"
-          description: "Build provider for `nsL.jar`, builds [nsL Assembler](https://sourceforge.net/projects/nslassembler/)"
+          description: "Build provider for `nsL.jar`, builds [nsL Assembler](https://sourceforge.net/projects/nslassembler/). Requires valid `pathToJar` in the package settings."
           type: 'boolean'
           default: true
           order: 6
@@ -88,7 +88,7 @@ module.exports =
     atom.config.onDidChange "#{meta.name}.components.language-nlf", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nlf')
     atom.config.onDidChange "#{meta.name}.components.language-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nsl')
     atom.config.onDidChange "#{meta.name}.components.nsis-plugins", ({newValue, oldValue}) => @toggleComponents(newValue, 'nsis-plugins')
-    atom.config.onDidChange "#{meta.name}.components.toolbar", ({newValue, oldValue}) => @toggleComponents(newValue, 'toolbar')
+    atom.config.onDidChange "#{meta.name}.components.toolbar", ({newValue, oldValue}) => @toggleToolbar(newValue)
 
   deactivate: ->
     @toolBar?.removeItems()
@@ -202,25 +202,28 @@ module.exports =
         atom.config.unset("#{meta.name}.components.#{component}")
         atom.packages.enablePackage(component)
 
-  toggleComponents: (enabling, component) ->
-    if component is 'toolbar'
-      if enabling
-        toggleVerb = "Enabling"
-      else
-        toggleVerb = "Disabling"
-
-      atom.confirm
-        message: "nsis-ide"
-        detailedMessage: "#{toggleVerb} the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
-        buttons:
-          "Reload Window": ->
-            atom.reload()
-          "Cancel": ->
-            return
-
-    if enabling
+  toggleComponents: (state, component) ->
+    if state
       atom.notifications.addSuccess("Enabling `#{component}` package", dismissable: false)
       atom.packages.enablePackage(component)
     else
       atom.notifications.addWarning("Disabling `#{component}` package", dismissable: false)
       atom.packages.disablePackage(component)
+
+  toggleToolbar: (state) ->
+    if state
+      verb = "Enabling"
+    else
+      verb = "Disabling"
+
+    atom.confirm
+      message: "nsis-ide"
+      detailedMessage: "#{verb} the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
+      buttons:
+        "Reload now": ->
+          # Room for improvment?
+          setTimeout =>
+            atom.reload()
+          , 300
+        "Cancel": ->
+          return
