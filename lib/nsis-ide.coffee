@@ -70,7 +70,7 @@ module.exports =
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
 
-    atom.config.onDidChange "#{meta.name}.toolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
+    atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
     atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
 
   deactivate: ->
@@ -188,7 +188,7 @@ module.exports =
         "Cancel": ->
           return
 
-  toggleProvider: (reload) ->
+  toggleProvider: (reloadWindow) ->
     @buildProvider = atom.config.get("#{meta.name}.building.defaultProvider")
 
     if atom.packages.isPackageDisabled(@buildProvider)
@@ -201,4 +201,4 @@ module.exports =
       @buildCmd = "MakeNSIS:compile"
       @buildWxCmd = "MakeNSIS:compile-and-stop-at-warning"
 
-    @toggleToolbar() if reload
+    @toggleToolbar() if reloadWindow
