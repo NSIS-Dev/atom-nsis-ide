@@ -27,15 +27,19 @@
   "package-deps": [
     "build",
     "build-makensis",
+    "build-makensis-wine",
     "build-nsl",
     "language-nlf",
     "language-nsis",
     "language-nsl",
     "linter",
     "minimap",
+    "minimap-highlight-selected",
     "minimap-linter",
+    "minimap-selection",
     "nsis-plugins",
-    "tool-bar"
+    "tool-bar",
+    "set-syntax"
   ],
   "consumedServices": {
     "tool-bar": {
