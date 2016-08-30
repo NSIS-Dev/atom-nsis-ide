@@ -2,14 +2,6 @@ meta = require '../package.json'
 os = require 'os'
 
 module.exports =
-  components: [
-    "build-makensis",
-    "build-makensis-wine",
-    "build-nsl",
-    "language-nlf",
-    "language-nsl",
-    "nsis-plugins"
-  ]
   buildProvider: null
   buildCmd: null
   buildWxCmd: null
