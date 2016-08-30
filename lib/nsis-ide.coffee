@@ -46,7 +46,7 @@ module.exports =
           order: 5
         "build-makensis-wine":
           title: "Enable build-makensis-wine"
-          description: "Build provider for `makensis`, builds NSIS scripts on Wine](https://www.winehq.org/)"
+          description: "Build provider for `makensis`, builds NSIS scripts on [Wine](https://www.winehq.org/)"
           type: 'boolean'
           default: false
           order: 6
