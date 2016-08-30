@@ -10,103 +10,74 @@ module.exports =
     "language-nsl",
     "nsis-plugins"
   ]
+  buildProvider: null
+  buildCmd: null
+  buildWxCmd: null
   config:
-    components:
+    building:
       type: "object"
+      order: 1
       properties:
-        toolbar:
-          title: "Enable toolbar"
-          description: "Displays a toolbar with useful NSIS actions, can be tweaked in the Toolbar settings below"
-          order: 1
-          type: 'boolean'
-          default: true
-        "nsis-plugins":
-          title: "Enable nsis-plugins"
-          description: "Snippets for third-party plug-ins"
-          type: 'boolean'
-          default: true
-          order: 2
-        "language-nlf":
-          title: "Enable language-nlf"
-          description: "Support for NSIS Language Files (NLF)"
-          type: 'boolean'
-          default: true
-          order: 3
-        "language-nsl":
-          title: "Enable language-nsl"
-          description: "Support for [nsL Assembler](https://sourceforge.net/projects/nslassembler/)"
-          type: 'boolean'
-          default: true
-          order: 4
-        "build-makensis":
-          title: "Enable build-makensis"
-          description: "Build provider for `makensis`, builds NSIS scripts"
-          type: 'boolean'
-          default: true
-          order: 5
-        "build-makensis-wine":
-          title: "Enable build-makensis-wine"
-          description: "Build provider for `makensis`, builds NSIS scripts on Wine](https://www.winehq.org/)"
-          type: 'boolean'
-          default: false
-          order: 6
-        "build-nsl":
-          title: "Enable build-nsl"
-          description: "Build provider for `nsL.jar`, builds [nsL Assembler](https://sourceforge.net/projects/nslassembler/). Requires valid `pathToJar` in the package settings."
-          type: 'boolean'
-          default: true
-          order: 7
+        defaultProvider:
+          title: "Build Provider"
+          description: "Choose your preferred build provider for `makensis`"
+          type: "string"
+          enum: [
+            "build-makensis"
+            "build-makensis-wine"
+          ]
+          default: "build-makensis"
     toolbar:
       type: "object"
       properties:
+        enableToolbar:
+          title: "Enable toolbar"
+          description: "Displays a toolbar with useful NSIS actions, can be tweaked in the Toolbar settings below"
+          order: 1
+          type: "boolean"
+          default: true
         showBuildTools:
           title: "Show Build Tools"
           description: "Displays buttons to build NSIS scripts"
-          type: 'boolean'
+          type: "boolean"
           default: true
           order: 1
         showFileButtons:
           title: "Show File Tools"
           description: "Displays buttons for `Load` / `Save`"
-          type: 'boolean'
+          type: "boolean"
           default: true
           order: 2
         showHistoryButtons:
           title: "Show History Tools"
           description: "Displays buttons for `Undo` / `Redo`"
-          type: 'boolean'
+          type: "boolean"
           default: true
           order: 3
         showClipboardButtons:
           title: "Show Clipboard Tools"
           description: "Displays buttons for `Cut` / `Copy` / `Paste`"
-          type: 'boolean'
+          type: "boolean"
           default: false
           order: 4
         showInfoButtons:
           title: "Show Info Tools"
           description: "Displays buttons to show `makensis` version and to reveal file"
-          type: 'boolean'
+          type: "boolean"
           default: true
-          order: 4
+          order: 5
 
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
-    @adjustSettings()
 
-    atom.config.onDidChange "#{meta.name}.components.build-makensis", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-makensis')
-    atom.config.onDidChange "#{meta.name}.components.build-makensis-wine", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-makensis-wine')
-    atom.config.onDidChange "#{meta.name}.components.build-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-nsl')
-    atom.config.onDidChange "#{meta.name}.components.language-nlf", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nlf')
-    atom.config.onDidChange "#{meta.name}.components.language-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nsl')
-    atom.config.onDidChange "#{meta.name}.components.nsis-plugins", ({newValue, oldValue}) => @toggleComponents(newValue, 'nsis-plugins')
-    atom.config.onDidChange "#{meta.name}.components.toolbar", ({newValue, oldValue}) => @toggleToolbar(newValue)
+    atom.config.onDidChange "#{meta.name}.toolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
+    atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
 
   deactivate: ->
     @toolBar?.removeItems()
 
   consumeToolBar: (toolBar) ->
-    unless atom.config.get("#{meta.name}.components.toolbar")
+    unless atom.config.get("#{meta.name}.toolbar.enableToolbar")
       return
 
     switch os.platform()
@@ -119,16 +90,18 @@ module.exports =
 
     @toolBar = toolBar "#{meta.name}"
 
-    if atom.packages.loadedPackages['build-makensis'] and atom.config.get("#{meta.name}.toolbar.showBuildTools")
+    @toggleProvider(false)
+
+    if atom.packages.loadedPackages[@buildProvider] and atom.config.get("#{meta.name}.toolbar.showBuildTools")
       @toolBar.addButton
         icon: 'paper-plane'
-        callback: 'makensis:compile'
+        callback: @buildCmd
         tooltip: 'Compile'
         iconset: 'fa'
 
       @toolBar.addButton
         icon: 'paper-plane-o'
-        callback: 'makensis:compile-and-stop-at-warning'
+        callback: @buildWxCmd
         tooltip: 'Compile and stop at warnings'
         iconset: 'fa'
 
@@ -202,31 +175,10 @@ module.exports =
 
         @toolBar.addSpacer()
 
-  adjustSettings: () ->
-    for component in @components
-      if atom.packages.isPackageDisabled(component) and atom.config.get("#{meta.name}.components.#{component}") is true
-        atom.config.set("#{meta.name}.components.#{component}", false)
-      else if atom.packages.isPackageActive(component) and atom.config.get("#{meta.name}.components.#{component}") isnt false
-        atom.config.unset("#{meta.name}.components.#{component}")
-        atom.packages.enablePackage(component)
-
-  toggleComponents: (state, component) ->
-    if state
-      atom.notifications.addSuccess("Enabling `#{component}` package", dismissable: false)
-      atom.packages.enablePackage(component)
-    else
-      atom.notifications.addWarning("Disabling `#{component}` package", dismissable: false)
-      atom.packages.disablePackage(component)
-
   toggleToolbar: (state) ->
-    if state
-      verb = "Enabling"
-    else
-      verb = "Disabling"
-
     atom.confirm
       message: "nsis-ide"
-      detailedMessage: "#{verb} the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
+      detailedMessage: "Modifying the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
       buttons:
         "Reload now": ->
           # Room for improvment?
@@ -235,3 +187,18 @@ module.exports =
           , 300
         "Cancel": ->
           return
+
+  toggleProvider: (reload) ->
+    @buildProvider = atom.config.get("#{meta.name}.building.defaultProvider")
+
+    if atom.packages.isPackageDisabled(@buildProvider)
+      atom.packages.enablePackage(@buildProvider)
+
+    if @buildProvider is "build-makensis-wine"
+      @buildCmd = "MakeNSIS-on-wine:compile"
+      @buildWxCmd = "MakeNSIS-on-wine:compile-and-stop-at-warning"
+    else
+      @buildCmd = "MakeNSIS:compile"
+      @buildWxCmd = "MakeNSIS:compile-and-stop-at-warning"
+
+    @toggleToolbar() if reload
