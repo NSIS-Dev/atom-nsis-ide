@@ -11,8 +11,8 @@ module.exports =
       order: 1
       properties:
         defaultProvider:
-          title: "Build Provider"
-          description: "Choose your preferred build provider for `makensis`"
+          title: "Default Provider"
+          description: "Choose your default build provider for `makensis`"
           type: "string"
           enum: [
             "build-makensis"
