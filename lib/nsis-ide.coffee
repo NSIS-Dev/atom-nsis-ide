@@ -62,6 +62,9 @@ module.exports =
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
 
+    # temporary clean-up
+    atom.config.unset("#{meta.name}.components")
+
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
     atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
 
