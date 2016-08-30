@@ -45,7 +45,7 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
     * language grammar
     * auto-complete
     * snippets
-    * build tools
+    * build tools (native and Wine)
     * linter
 * NSIS Language Files
     * language grammar
