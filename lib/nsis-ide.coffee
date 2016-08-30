@@ -1,10 +1,10 @@
 meta = require '../package.json'
-compare = require('compare-versions')
 os = require 'os'
 
 module.exports =
   components: [
     "build-makensis",
+    "build-makensis-wine",
     "build-nsl",
     "language-nlf",
     "language-nsl",
@@ -44,12 +44,18 @@ module.exports =
           type: 'boolean'
           default: true
           order: 5
+        "build-makensis-wine":
+          title: "Enable build-makensis-wine"
+          description: "Build provider for `makensis`, builds NSIS scripts on Wine"
+          type: 'boolean'
+          default: false
+          order: 6
         "build-nsl":
           title: "Enable build-nsl"
           description: "Build provider for `nsL.jar`, builds [nsL Assembler](https://sourceforge.net/projects/nslassembler/). Requires valid `pathToJar` in the package settings."
           type: 'boolean'
           default: true
-          order: 6
+          order: 7
     toolbar:
       type: "object"
       properties:
