@@ -6,7 +6,7 @@
   "main": "./lib/nsis-ide",
   "repository": {
     "type": "git",
-    "url": "https://github.com/NSIS-Dev/atom-nsis-ide"
+    "url": "git+https://github.com/NSIS-Dev/atom-nsis-ide.git"
   },
   "keywords": [
     "nsis",
@@ -25,6 +25,7 @@
     "atom": ">=1.0.0 <2.0.0"
   },
   "package-deps": [
+    "browse",
     "build",
     "build-makensis",
     "build-makensis-wine",

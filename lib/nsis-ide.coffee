@@ -46,7 +46,7 @@ module.exports =
           order: 5
         "build-makensis-wine":
           title: "Enable build-makensis-wine"
-          description: "Build provider for `makensis`, builds NSIS scripts on [Wine](https://www.winehq.org/)"
+          description: "Build provider for `makensis`, builds NSIS scripts on Wine](https://www.winehq.org/)"
           type: 'boolean'
           default: false
           order: 6
@@ -135,7 +135,6 @@ module.exports =
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showFileButtons")
-
       @toolBar.addButton
         icon: 'folder-open-o'
         callback: 'application:open'
@@ -151,15 +150,14 @@ module.exports =
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showHistoryButtons")
-
       @toolBar.addButton
-        icon: 'step-backward'
+        icon: 'angle-left'
         callback: 'core:undo'
         tooltip: "Undo"
         iconset: 'fa'
 
       @toolBar.addButton
-        icon: 'step-forward'
+        icon: 'angle-right'
         callback: 'core:redo'
         tooltip: "Redo"
         iconset: 'fa'
@@ -167,7 +165,6 @@ module.exports =
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showClipboardButtons")
-
       @toolBar.addButton
         icon: 'scissors'
         callback: 'core:cut'
@@ -189,7 +186,6 @@ module.exports =
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showInfoButtons")
-
       if atom.packages.loadedPackages['browse']
           @toolBar.addButton
             icon: 'eye'
