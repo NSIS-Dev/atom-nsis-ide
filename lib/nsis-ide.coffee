@@ -46,7 +46,7 @@ module.exports =
           order: 5
         "build-makensis-wine":
           title: "Enable build-makensis-wine"
-          description: "Build provider for `makensis`, builds NSIS scripts on Wine"
+          description: "Build provider for `makensis`, builds NSIS scripts on Wine](https://www.winehq.org/)"
           type: 'boolean'
           default: false
           order: 6
@@ -64,32 +64,38 @@ module.exports =
           description: "Displays buttons to build NSIS scripts"
           type: 'boolean'
           default: true
+          order: 1
         showFileButtons:
           title: "Show File Tools"
           description: "Displays buttons for `Load` / `Save`"
           type: 'boolean'
           default: true
+          order: 2
         showHistoryButtons:
           title: "Show History Tools"
           description: "Displays buttons for `Undo` / `Redo`"
           type: 'boolean'
           default: true
+          order: 3
         showClipboardButtons:
           title: "Show Clipboard Tools"
           description: "Displays buttons for `Cut` / `Copy` / `Paste`"
           type: 'boolean'
           default: false
+          order: 4
         showInfoButtons:
           title: "Show Info Tools"
           description: "Displays buttons to show `makensis` version and to reveal file"
           type: 'boolean'
           default: true
+          order: 4
 
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
     @adjustSettings()
 
     atom.config.onDidChange "#{meta.name}.components.build-makensis", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-makensis')
+    atom.config.onDidChange "#{meta.name}.components.build-makensis-wine", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-makensis-wine')
     atom.config.onDidChange "#{meta.name}.components.build-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'build-nsl')
     atom.config.onDidChange "#{meta.name}.components.language-nlf", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nlf')
     atom.config.onDidChange "#{meta.name}.components.language-nsl", ({newValue, oldValue}) => @toggleComponents(newValue, 'language-nsl')
