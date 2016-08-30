@@ -29,6 +29,7 @@
     "build-makensis",
     "build-makensis-wine",
     "build-nsl",
+    "file-icons",
     "language-nlf",
     "language-nsis",
     "language-nsl",
