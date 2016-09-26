@@ -100,6 +100,13 @@ module.exports =
         tooltip: 'Compile and stop at warnings'
         iconset: 'fa'
 
+      if atom.packages.loadedPackages['language-nsis']
+        @toolBar.addButton
+          icon: 'cog'
+          callback: @buildFileCmd
+          tooltip: 'Create build file'
+          iconset: 'fa'
+
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showFileButtons")
@@ -192,8 +199,10 @@ module.exports =
     if @buildProvider is "build-makensis-wine"
       @buildCmd = "MakeNSIS-on-wine:compile"
       @buildWxCmd = "MakeNSIS-on-wine:compile-and-stop-at-warning"
+      @buildFileCmd = "NSIS:create-.atom–build-file-for-wine"
     else
       @buildCmd = "MakeNSIS:compile"
       @buildWxCmd = "MakeNSIS:compile-and-stop-at-warning"
+      @buildFileCmd = "NSIS:create-.atom–build-file"
 
     @toggleToolbar() if reloadWindow
