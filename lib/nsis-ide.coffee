@@ -162,11 +162,11 @@ module.exports =
 
     if atom.config.get("#{meta.name}.toolbar.showInfoButtons")
       if atom.packages.loadedPackages['browse']
-          @toolBar.addButton
-            icon: 'eye'
-            callback: 'browse:reveal-file'
-            tooltip: "Show in #{fileManager}"
-            iconset: 'fa'
+        @toolBar.addButton
+          icon: 'eye'
+          callback: 'browse:reveal-file'
+          tooltip: "Show in #{fileManager}"
+          iconset: 'fa'
 
       if atom.packages.loadedPackages['language-nsis']
         @toolBar.addButton
@@ -184,7 +184,7 @@ module.exports =
       buttons:
         "Reload now": ->
           # Room for improvment?
-          setTimeout =>
+          setTimeout ->
             atom.reload()
           , 300
         "Cancel": ->
