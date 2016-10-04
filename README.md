@@ -6,6 +6,7 @@
 [![Travis](https://img.shields.io/travis/NSIS-Dev/atom-nsis-ide.svg?style=flat-square)](https://travis-ci.org/NSIS-Dev/atom-nsis-ide)
 [![David](https://img.shields.io/david/NSIS-Dev/atom-nsis-ide.svg?style=flat-square)](https://david-dm.org/NSIS-Dev/atom-nsis-ide)
 [![David](https://img.shields.io/david/dev/NSIS-Dev/atom-nsis-ide.svg?style=flat-square)](https://david-dm.org/NSIS-Dev/atom-nsis-ide?type=dev)
+[![Gitter](https://img.shields.io/badge/chat-Gitter-ed1965.svg?style=flat-square)](https://gitter.im/NSIS-Dev/Atom)
 
 Adds IDE-like features for [NSIS](https://nsis.sourceforge.net) development in Atom
 
