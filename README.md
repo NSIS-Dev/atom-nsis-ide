@@ -41,6 +41,8 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
 
 ## Components
 
+This package is largely a “meta package”. Other than adding adding a tool-bar, it consists mainly of third-party packages.
+
 * NSIS
     * language grammar
     * auto-complete
@@ -56,8 +58,8 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
     * snippets
     * build tools
 
+Also included are several convenience packages, that are not primarily targeted at NSIS users.
+
 ## License
 
 This work is dual-licensed under [The MIT License](https://opensource.org/licenses/MIT) and the [GNU General Public License, version 2.0](https://opensource.org/licenses/GPL-2.0)
-
-[nsL Assembler]: https://atom.io/packages/language-nsl
