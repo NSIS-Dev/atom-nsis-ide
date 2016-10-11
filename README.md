@@ -36,6 +36,13 @@ Clone repository as `nsis-ide`:
 $ git clone https://github.com/NSIS-Dev/atom-nsis-ide nsis-ide
 ```
 
+Install Node dependencies:
+
+```bash
+$ cd nsis-ide
+$ yarn || npm install
+```
+
 ### Dependencies
 
 This package makes use of [atom-package-deps](https://github.com/steelbrain/package-deps) to automatically install additional packages it depends on. However, you *might* have to restart Atom in order to use them.
