@@ -36,10 +36,9 @@ Clone repository as `nsis-ide`:
 $ git clone https://github.com/NSIS-Dev/atom-nsis-ide nsis-ide
 ```
 
-Install Node dependencies:
+Inside the cloned directory, install Node dependencies:
 
 ```bash
-$ cd nsis-ide
 $ yarn || npm install
 ```
 
