@@ -31,7 +31,6 @@
     "build-makensis-wine",
     "build-nsl",
     "file-icons",
-    "keyboard-localization",
     "language-ini",
     "language-nsis",
     "language-nsl",
