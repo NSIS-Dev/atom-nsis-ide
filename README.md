@@ -18,7 +18,7 @@ Install `nsis-ide` from Atom's [Package Manager](http://flight-manual.atom.io/us
 
 `$ apm install nsis-ide`
 
-### GitHub
+### Using Git
 
 Change to your Atom packages directory:
 
