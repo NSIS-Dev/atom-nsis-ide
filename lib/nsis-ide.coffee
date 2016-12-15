@@ -62,18 +62,19 @@ module.exports =
   activate: (state) ->
     require('atom-package-deps').install(meta.name)
 
-    # temporary clean-up
-    atom.config.unset("#{meta.name}.components")
-
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
     atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
 
   deactivate: ->
-    @toolBar?.removeItems()
+    if toolBar
+      toolBar.removeItems()
+      toolBar = null
 
   consumeToolBar: (toolBar) ->
     unless atom.config.get("#{meta.name}.toolbar.enableToolbar")
       return
+
+    @toolBar = toolBar "#{meta.name}"
 
     switch os.platform()
       when 'win32'
@@ -82,8 +83,6 @@ module.exports =
         fileManager = 'Finder'
       else
         fileManager = 'file manager'
-
-    @toolBar = toolBar "#{meta.name}"
 
     @toggleProvider(false)
 
@@ -177,18 +176,22 @@ module.exports =
 
         @toolBar.addSpacer()
 
-  toggleToolbar: (state) ->
-    atom.confirm
-      message: "nsis-ide"
-      detailedMessage: "Modifying the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
-      buttons:
-        "Reload now": ->
-          # Room for improvment?
-          setTimeout ->
-            atom.reload()
-          , 300
-        "Cancel": ->
-          return
+  toggleToolbar: (getToolBar) ->
+    if @toolBar
+      @toolBar.removeItems()
+      @toolBar = null
+    else
+      atom.confirm
+        message: "nsis-ide"
+        detailedMessage: "Modifying the toolbar requires a reload of the Atom window. It is recommend to save your work before reloading."
+        buttons:
+          "Reload now": ->
+            # Room for improvment?
+            setTimeout ->
+              atom.reload()
+            , 300
+          "Cancel": ->
+            return
 
   toggleProvider: (reloadWindow) ->
     @buildProvider = atom.config.get("#{meta.name}.building.defaultProvider")
