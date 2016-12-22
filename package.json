@@ -30,6 +30,8 @@
     "build-makensis",
     "build-makensis-wine",
     "build-nsl",
+    "console-panel",
+    "edit-in-new-tab",
     "logo-file-icons",
     "haskell-nsis",
     "language-ini",
