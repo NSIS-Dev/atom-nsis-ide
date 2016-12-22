@@ -1,6 +1,6 @@
 {
   "name": "nsis-ide",
-  "version": "0.9.4",
+  "version": "0.10.0",
   "description": "Adds IDE-like features for NSIS development in Atom",
   "license": "MIT OR GPL-2.0",
   "main": "./lib/nsis-ide",
