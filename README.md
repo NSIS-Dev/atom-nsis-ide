@@ -51,26 +51,26 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
 This package is largely a “meta package”. Other than adding adding a tool-bar, it consists mainly of third-party NSIS packages. Together, they turn Atom into a powerful, *near-IDE* editor for NSIS developers.
 
 **NSIS**
-[`language-nsis`](https://atom.io/packages/language-nsis) – grammar, snippets, build tool
-[`nsis-plugins`](https://atom.io/packages/nsis-plugins) – snippets for third-party plug-ins
-[`build-makensis`](https://atom.io/packages/build-makensis) – alternative build tools
-[`build-makensis-wine`](https://atom.io/packages/build-makensis-wine) – build on any [Wine](https://www.winehq.org/) platform
-[`language-nlf`](https://atom.io/packages/language-nlf) – grammar, snippets, build tool for `.nlf` files
+* [`language-nsis`](https://atom.io/packages/language-nsis) – grammar, snippets, build tool
+* [`nsis-plugins`](https://atom.io/packages/nsis-plugins) – snippets for third-party plug-ins
+* [`build-makensis`](https://atom.io/packages/build-makensis) – alternative build tools
+* [`build-makensis-wine`](https://atom.io/packages/build-makensis-wine) – build on any [Wine](https://www.winehq.org/) platform
+* [`language-nlf`](https://atom.io/packages/language-nlf) – grammar, snippets, build tool for `.nlf` files
 
 **nsL Assembler**
-[`language-nsl`](https://atom.io/packages/language-nsl) – grammar, snippets, build tool for [nsL Assembler](https://github.com/NSIS-Dev/nsl-assembler)
-[`build-nsl`](https://atom.io/packages/language-nsl) – alternative build tools
+* [`language-nsl`](https://atom.io/packages/language-nsl) – grammar, snippets, build tool for [nsL Assembler](https://github.com/NSIS-Dev/nsl-assembler)
+* [`build-nsl`](https://atom.io/packages/language-nsl) – alternative build tools
 
 **Haskell**
-[`haskell-nsis`](https://atom.io/packages/haskell-nsis) – snippets for [Haskell](https://hackage.haskell.org/package/nsis)
+* [`haskell-nsis`](https://atom.io/packages/haskell-nsis) – snippets for [Haskell](https://hackage.haskell.org/package/nsis)
 
 Also included are several convenience packages, that are not primarily targeted at NSIS users.
 
-[`linter`](https://atom.io/packages/linter)
-[`minimap`](https://atom.io/packages/minimap)
-[`tool-bar`](https://atom.io/packages/tool-bar)
-[`set-syntax`](https://atom.io/packages/set-syntax)
-[`browse`](https://atom.io/packages/browse)
+* [`linter`](https://atom.io/packages/linter)
+* [`minimap`](https://atom.io/packages/minimap)
+* [`tool-bar`](https://atom.io/packages/tool-bar)
+* [`set-syntax`](https://atom.io/packages/set-syntax)
+* [`browse`](https://atom.io/packages/browse)
 
 ## License
 
