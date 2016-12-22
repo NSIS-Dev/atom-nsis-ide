@@ -48,7 +48,7 @@ This package makes use of [atom-package-deps](https://github.com/steelbrain/pack
 
 ## Components
 
-This package is largely a “meta package”. Other than adding adding a tool-bar, it consists mainly of third-party packages.
+This package is largely a “meta package”. Other than adding adding a tool-bar, it consists mainly of third-party NSIS packages. Together, they turn Atom into a powerful, *near-IDE* editor for NSIS developers.
 
 * **NSIS**
     * [`language-nsis`](https://atom.io/packages/language-nsis)
@@ -61,15 +61,14 @@ This package is largely a “meta package”. Other than adding adding a tool-ba
     * [`build-nsl`](https://atom.io/packages/language-nsl)
 * **Haskell**
     * [`haskell-nsis`](https://atom.io/packages/haskell-nsis)
-* **Others**
-    * [`linter`](https://atom.io/packages/linter)
-    * [`minimap`](https://atom.io/packages/minimap)
-    * [`tool-bar`](https://atom.io/packages/tool-bar)
-    * [`set-syntax`](https://atom.io/packages/set-syntax)
-    * [`browse`](https://atom.io/packages/browse)
-    * and more
 
 Also included are several convenience packages, that are not primarily targeted at NSIS users.
+
+* [`linter`](https://atom.io/packages/linter)
+* [`minimap`](https://atom.io/packages/minimap)
+* [`tool-bar`](https://atom.io/packages/tool-bar)
+* [`set-syntax`](https://atom.io/packages/set-syntax)
+* [`browse`](https://atom.io/packages/browse)
 
 ## License
 
