@@ -54,7 +54,7 @@ This package is largely a “meta package”. Other than adding adding a tool-ba
 * [`language-nsis`](https://atom.io/packages/language-nsis) – grammar, snippets, build tool
 * [`nsis-plugins`](https://atom.io/packages/nsis-plugins) – snippets for third-party plug-ins
 * [`build-makensis`](https://atom.io/packages/build-makensis) – alternative build tools
-* [`build-makensis-wine`](https://atom.io/packages/build-makensis-wine) – build on any [Wine](https://www.winehq.org/) platform
+* [`build-makensis-wine`](https://atom.io/packages/build-makensis-wine) – build on any [Wine](https://www.winehq.org/)-compatible platform
 * [`language-nlf`](https://atom.io/packages/language-nlf) – grammar, snippets, build tool for `.nlf` files
 
 **nsL Assembler**
@@ -62,7 +62,7 @@ This package is largely a “meta package”. Other than adding adding a tool-ba
 * [`build-nsl`](https://atom.io/packages/language-nsl) – alternative build tools
 
 **Haskell**
-* [`haskell-nsis`](https://atom.io/packages/haskell-nsis) – snippets for [Haskell](https://hackage.haskell.org/package/nsis)
+* [`haskell-nsis`](https://atom.io/packages/haskell-nsis) – snippets for the [Haskell](https://hackage.haskell.org/package/nsis) DSL
 
 Also included are several convenience packages, that are not primarily targeted at NSIS users.
 
