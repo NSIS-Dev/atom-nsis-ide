@@ -21,6 +21,7 @@ module.exports =
           default: "build-makensis"
     toolbar:
       type: "object"
+      order: 2
       properties:
         enableToolbar:
           title: "Enable toolbar"
@@ -58,17 +59,40 @@ module.exports =
           type: "boolean"
           default: true
           order: 5
+    manageDependencies:
+      title: "Manage Dependencies"
+      description: "When enabled, this will automatically install third-party dependencies"
+      type: "boolean"
+      default: true
+      order: 3
 
   activate: (state) ->
-    require('atom-package-deps').install(meta.name)
+    {CompositeDisposable} = require 'atom'
+
+    # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
+    @subscriptions = new CompositeDisposable
+
+    # Register commands
+    @subscriptions.add atom.commands.add 'atom-workspace', 'nsis-ide:setup-package-dependencies': => @setupPackageDeps()
 
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
     atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
+
+    if atom.config.get('nsis-ide.manageDependencies')
+      @setupPackageDeps()
 
   deactivate: ->
     if toolBar
       toolBar.removeItems()
       toolBar = null
+
+  setupPackageDeps: () ->
+    require('atom-package-deps').install(meta.name)
+
+    for k, v of meta["package-deps"]
+      if atom.packages.isPackageDisabled(v)
+        console.log "Enabling package '#{v}'" if atom.inDevMode()
+        atom.packages.enablePackage(v)
 
   consumeToolBar: (toolBar) ->
     unless atom.config.get("#{meta.name}.toolbar.enableToolbar")
