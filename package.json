@@ -42,7 +42,6 @@
     "minimap-linter",
     "minimap-selection",
     "nsis-plugins",
-    "nsis-haskell",
     "tool-bar",
     "set-syntax"
   ],
