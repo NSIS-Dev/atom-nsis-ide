@@ -73,7 +73,7 @@ module.exports =
     @subscriptions = new CompositeDisposable
 
     # Register commands
-    @subscriptions.add atom.commands.add 'atom-workspace', 'nsis-ide:setup-package-dependencies': => @setupPackageDeps()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'NSIS-IDE:setup-package-dependencies': => @setupPackageDeps()
 
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
     atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
