@@ -1,5 +1,4 @@
-meta = require '../package.json'
-os = require 'os'
+meta = require "../package.json"
 
 module.exports =
   buildProvider: null
@@ -67,7 +66,7 @@ module.exports =
       order: 3
 
   activate: (state) ->
-    {CompositeDisposable} = require 'atom'
+    {CompositeDisposable} = require "atom"
 
     # Events subscribed to in atom's system can be easily cleaned up with a CompositeDisposable
     @subscriptions = new CompositeDisposable
@@ -87,7 +86,7 @@ module.exports =
       toolBar = null
 
   setupPackageDeps: () ->
-    require('atom-package-deps').install(meta.name)
+    require("atom-package-deps").install(meta.name)
 
     for k, v of meta["package-deps"]
       if atom.packages.isPackageDisabled(v)
@@ -95,12 +94,13 @@ module.exports =
         atom.packages.enablePackage(v)
 
   consumeToolBar: (toolBar) ->
+    {platform} = require "os"
     unless atom.config.get("#{meta.name}.toolbar.enableToolbar")
       return
 
     @toolBar = toolBar "#{meta.name}"
 
-    switch os.platform()
+    switch platform()
       when 'win32'
         fileManager = 'Explorer'
       when 'darwin'
@@ -125,7 +125,7 @@ module.exports =
 
       if atom.packages.loadedPackages['language-nsis']
         @toolBar.addButton
-          icon: 'cog'
+          icon: 'download'
           callback: @buildFileCmd
           tooltip: 'Create build file'
           iconset: 'fa'
@@ -192,6 +192,12 @@ module.exports =
           iconset: 'fa'
 
       if atom.packages.loadedPackages['language-nsis']
+        @toolBar.addButton
+          icon: 'sliders'
+          callback: 'NSIS:open-package-settings'
+          tooltip: "Open Settings"
+          iconset: 'fa'
+
         @toolBar.addButton
           icon: 'info-circle'
           callback: 'NSIS:show-version'
