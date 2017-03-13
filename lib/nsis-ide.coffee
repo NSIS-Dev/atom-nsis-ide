@@ -77,7 +77,7 @@ module.exports =
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
     atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
 
-    if atom.config.get('nsis-ide.manageDependencies') and atom.inSafeMode is false 
+    if atom.config.get('nsis-ide.manageDependencies') and atom.inSafeMode is false
       @setupPackageDeps()
 
   deactivate: ->
