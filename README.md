@@ -56,7 +56,6 @@ This package is largely a “meta package”. Other than adding adding a tool-ba
 * [`build-makensis`](https://atom.io/packages/build-makensis) – alternative build tools
 * [`build-makensis-wine`](https://atom.io/packages/build-makensis-wine) – build on any [Wine](https://www.winehq.org/)-compatible platform
 * [`language-nlf`](https://atom.io/packages/language-nlf) – grammar, snippets, build tool for `.nlf` files
-
 **nsL Assembler**
 * [`language-nsl`](https://atom.io/packages/language-nsl) – grammar, snippets, build tool for [nsL Assembler](https://github.com/NSIS-Dev/nsl-assembler)
 * [`build-nsl`](https://atom.io/packages/language-nsl) – alternative build tools
