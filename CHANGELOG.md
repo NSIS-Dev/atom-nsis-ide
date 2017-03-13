@@ -1,8 +1,19 @@
-# v0.11.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.1)
+
+# v0.11.3 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.3)
+
+- fix `CHANGELOG.md`
+
+# v0.11.2 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.2)
 
 - lazy-load dependencies
 - include `CHANGELOG.md`
 - update dependencies
+
+# v0.11.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.1)
+
+* update settings label
+* update `devDependencies`
+* update Travis CI settings
 
 # v0.11.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.0)
 
