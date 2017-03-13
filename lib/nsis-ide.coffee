@@ -33,31 +33,31 @@ module.exports =
           description: "Displays buttons to build NSIS scripts"
           type: "boolean"
           default: true
-          order: 1
+          order: 2
         showFileButtons:
           title: "Show File Tools"
           description: "Displays buttons for `Load` / `Save`"
           type: "boolean"
           default: true
-          order: 2
+          order: 3
         showHistoryButtons:
           title: "Show History Tools"
           description: "Displays buttons for `Undo` / `Redo`"
           type: "boolean"
           default: true
-          order: 3
+          order: 4
         showClipboardButtons:
           title: "Show Clipboard Tools"
           description: "Displays buttons for `Cut` / `Copy` / `Paste`"
           type: "boolean"
           default: false
-          order: 4
+          order: 5
         showInfoButtons:
           title: "Show Info Tools"
           description: "Displays buttons to show `makensis` version and to reveal file"
           type: "boolean"
           default: true
-          order: 5
+          order: 6
     manageDependencies:
       title: "Manage Dependencies"
       description: "When enabled, third-party dependencies will be installed automatically"
