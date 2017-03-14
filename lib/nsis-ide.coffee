@@ -226,7 +226,7 @@ module.exports =
 
   buildCommand: (isStrict) ->
     editor = atom.workspace.getActiveTextEditor()
-    return atom.notifications.addWarning("**#{meta.name}**: No active editor", dismissable: false) unless editor? 
+    return atom.notifications.addWarning("**#{meta.name}**: No active editor", dismissable: false) unless editor?
 
     defaultProvider = atom.config.get("#{meta.name}.building.defaultProvider")
 
@@ -241,7 +241,7 @@ module.exports =
 
   buildFile: () ->
     editor = atom.workspace.getActiveTextEditor()
-    return atom.notifications.addWarning("**#{meta.name}**: No active editor", dismissable: false) unless editor? 
+    return atom.notifications.addWarning("**#{meta.name}**: No active editor", dismissable: false) unless editor?
 
     defaultProvider = atom.config.get("#{meta.name}.building.defaultProvider")
 
