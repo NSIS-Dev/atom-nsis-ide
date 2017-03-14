@@ -1,9 +1,6 @@
 meta = require "../package.json"
 
 module.exports =
-  buildProvider: null
-  buildCmd: null
-  buildWxCmd: null
   config:
     building:
       type: "object"
@@ -74,13 +71,14 @@ module.exports =
 
     # Register commands
     @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:setup-package-dependencies": => @setupPackageDeps()
-    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile": => @buildCommand(false)
-    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile-strict": => @buildCommand(true)
-    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:create-build-file": => @buildFile()
+    if atom.config.get("#{meta.name}.enableToolbar") and atom.config.get("#{meta.name}.toolbar.showBuildTools")
+      @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile": => @buildCommand(false)
+      @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile-strict": => @buildCommand(true)
+      @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:create-build-file": => @buildFile()
 
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
 
-    if atom.config.get("nsis-ide.manageDependencies") and atom.inSafeMode is false
+    if atom.config.get("#{meta.name}.manageDependencies") and atom.inSafeMode is false
       @setupPackageDeps()
 
   deactivate: ->
