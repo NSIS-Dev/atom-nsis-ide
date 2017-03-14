@@ -14,10 +14,11 @@ module.exports =
           description: "Choose your default build provider for `makensis`"
           type: "string"
           enum: [
+            "(default)"
             "build-makensis"
             "build-makensis-wine"
           ]
-          default: "build-makensis"
+          default: "(default)"
     toolbar:
       type: "object"
       order: 2
@@ -72,12 +73,14 @@ module.exports =
     @subscriptions = new CompositeDisposable
 
     # Register commands
-    @subscriptions.add atom.commands.add 'atom-workspace', 'NSIS-IDE:setup-package-dependencies': => @setupPackageDeps()
+    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:setup-package-dependencies": => @setupPackageDeps()
+    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile": => @buildCommand(false)
+    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile-strict": => @buildCommand(true)
+    @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:create-build-file": => @buildFile()
 
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
-    atom.config.onDidChange "#{meta.name}.building.defaultProvider", => @toggleProvider(true)
 
-    if atom.config.get('nsis-ide.manageDependencies') and atom.inSafeMode is false
+    if atom.config.get("nsis-ide.manageDependencies") and atom.inSafeMode is false
       @setupPackageDeps()
 
   deactivate: ->
@@ -101,108 +104,106 @@ module.exports =
     @toolBar = toolBar "#{meta.name}"
 
     switch platform()
-      when 'win32'
-        fileManager = 'Explorer'
-      when 'darwin'
-        fileManager = 'Finder'
+      when "win32"
+        fileManager = "Explorer"
+      when "darwin"
+        fileManager = "Finder"
       else
-        fileManager = 'file manager'
+        fileManager = "file manager"
 
-    @toggleProvider(false)
-
-    if atom.packages.loadedPackages[@buildProvider] and atom.config.get("#{meta.name}.toolbar.showBuildTools")
+    if atom.config.get("#{meta.name}.toolbar.showBuildTools")
       @toolBar.addButton
-        icon: 'paper-plane'
-        callback: @buildCmd
-        tooltip: 'Compile'
-        iconset: 'fa'
+        icon: "paper-plane"
+        callback: "NSIS-IDE:compile"
+        tooltip: "Compile"
+        iconset: "fa"
 
       @toolBar.addButton
-        icon: 'paper-plane-o'
-        callback: @buildWxCmd
-        tooltip: 'Compile and stop at warnings'
-        iconset: 'fa'
+        icon: "paper-plane-o"
+        callback: "NSIS-IDE:compile-strict"
+        tooltip: "Compile and stop at warnings"
+        iconset: "fa"
 
-      if atom.packages.loadedPackages['language-nsis']
+      if atom.packages.loadedPackages["language-nsis"]
         @toolBar.addButton
-          icon: 'download'
-          callback: @buildFileCmd
-          tooltip: 'Create build file'
-          iconset: 'fa'
+          icon: "download"
+          callback: "NSIS-IDE:create-build-file"
+          tooltip: "Create build file"
+          iconset: "fa"
 
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showFileButtons")
       @toolBar.addButton
-        icon: 'folder-open-o'
-        callback: 'application:open'
+        icon: "folder-open-o"
+        callback: "application:open"
         tooltip: "Open"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addButton
-        icon: 'floppy-o'
-        callback: 'core:save'
+        icon: "floppy-o"
+        callback: "core:save"
         tooltip: "Save"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showHistoryButtons")
       @toolBar.addButton
-        icon: 'angle-left'
-        callback: 'core:undo'
+        icon: "angle-left"
+        callback: "core:undo"
         tooltip: "Undo"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addButton
-        icon: 'angle-right'
-        callback: 'core:redo'
+        icon: "angle-right"
+        callback: "core:redo"
         tooltip: "Redo"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showClipboardButtons")
       @toolBar.addButton
-        icon: 'scissors'
-        callback: 'core:cut'
+        icon: "scissors"
+        callback: "core:cut"
         tooltip: "Cut"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addButton
-        icon: 'clone'
-        callback: 'core:copy'
+        icon: "clone"
+        callback: "core:copy"
         tooltip: "Copy"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addButton
-        icon: 'clipboard'
-        callback: 'core:paste'
+        icon: "clipboard"
+        callback: "core:paste"
         tooltip: "Paste"
-        iconset: 'fa'
+        iconset: "fa"
 
       @toolBar.addSpacer()
 
     if atom.config.get("#{meta.name}.toolbar.showInfoButtons")
-      if atom.packages.loadedPackages['browse']
+      if atom.packages.loadedPackages["browse"]
         @toolBar.addButton
-          icon: 'eye'
-          callback: 'browse:reveal-file'
+          icon: "eye"
+          callback: "browse:reveal-file"
           tooltip: "Show in #{fileManager}"
-          iconset: 'fa'
+          iconset: "fa"
 
-      if atom.packages.loadedPackages['language-nsis']
+      if atom.packages.loadedPackages["language-nsis"]
         @toolBar.addButton
-          icon: 'sliders'
-          callback: 'NSIS:open-package-settings'
+          icon: "sliders"
+          callback: "NSIS:open-package-settings"
           tooltip: "Open Settings"
-          iconset: 'fa'
+          iconset: "fa"
 
         @toolBar.addButton
-          icon: 'info-circle'
-          callback: 'NSIS:show-version'
+          icon: "info-circle"
+          callback: "NSIS:show-version"
           tooltip: "Show makensis version"
-          iconset: 'fa'
+          iconset: "fa"
 
         @toolBar.addSpacer()
 
@@ -223,19 +224,30 @@ module.exports =
           "Cancel": ->
             return
 
-  toggleProvider: (reloadWindow) ->
-    @buildProvider = atom.config.get("#{meta.name}.building.defaultProvider")
+  buildCommand: (isStrict) ->
+    editor = atom.workspace.getActiveTextEditor()
+    return atom.notifications.addWarning("**#{meta.name}**: No active editor", dismissable: false) unless editor? 
 
-    if atom.packages.isPackageDisabled(@buildProvider)
-      atom.packages.enablePackage(@buildProvider)
+    defaultProvider = atom.config.get("#{meta.name}.building.defaultProvider")
 
-    if @buildProvider is "build-makensis-wine"
-      @buildCmd = "MakeNSIS-on-wine:compile"
-      @buildWxCmd = "MakeNSIS-on-wine:compile-and-stop-at-warning"
-      @buildFileCmd = "NSIS:create-.atom–build-file-for-wine"
+    if defaultProvider is "build-makensis" and atom.packages.loadedPackages["build-makensis"]
+      buildCommand = if isStrict then "MakeNSIS:compile-and-stop-at-warning" else "MakeNSIS:compile"
+    else if defaultProvider is "build-makensis-wine" and atom.packages.loadedPackages["build-makensis-wine"]
+      buildCommand = if isStrict then "MakeNSIS-on-wine:compile-and-stop-at-warning" else "MakeNSIS-on-wine:compile"
     else
-      @buildCmd = "MakeNSIS:compile"
-      @buildWxCmd = "MakeNSIS:compile-and-stop-at-warning"
-      @buildFileCmd = "NSIS:create-.atom–build-file"
+      buildCommand = if isStrict then "NSIS:save-&-compile-strict" else "NSIS:save-&-compile"
 
-    @toggleToolbar() if reloadWindow
+    atom.commands.dispatch atom.views.getView(editor), buildCommand
+
+  buildFile: () ->
+    editor = atom.workspace.getActiveTextEditor()
+    return atom.notifications.addWarning("**#{meta.name}**: No active editor", dismissable: false) unless editor? 
+
+    defaultProvider = atom.config.get("#{meta.name}.building.defaultProvider")
+
+    if defaultProvider is "build-makensis-wine" and atom.packages.loadedPackages["build-makensis-wine"]
+      buildFile = "NSIS:create-.atom–build-file-for-wine"
+    else
+      buildFile = "NSIS:create-.atom–build-file"
+
+    atom.commands.dispatch atom.views.getView(editor), buildFile
