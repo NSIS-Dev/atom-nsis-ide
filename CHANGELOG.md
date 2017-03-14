@@ -1,3 +1,8 @@
+# v0.12.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.12.0)
+
+- add `(default)` build provider
+- improve build provider handling
+
 # v0.11.4 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.4)
 
 - remove stray dependency
