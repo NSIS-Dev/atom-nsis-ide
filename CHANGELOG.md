@@ -1,3 +1,8 @@
+# v0.12.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.12.0)
+
+- conditional command subscription
+- remove stray variables
+
 # v0.12.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.12.0)
 
 - add `(default)` build provider
