@@ -1,3 +1,8 @@
+# v0.11.4 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.4)
+
+- remove stray dependency
+- limit `manageDependencies` scope
+- fix config order
 
 # v0.11.3 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.11.3)
 
