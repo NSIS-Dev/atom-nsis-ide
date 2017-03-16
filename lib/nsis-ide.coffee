@@ -1,5 +1,10 @@
 meta = require "../package.json"
 
+buildProviders = [ "(default)" ]
+buildProviders.push "build-makensis" if atom.packages.loadedPackages["build-makensis"]
+buildProviders.push "build-makensis-wine" if atom.packages.loadedPackages["build-makensis-wine"]
+buildProviders.push "script" if atom.packages.loadedPackages["script"]
+
 module.exports =
   config:
     building:
@@ -10,11 +15,7 @@ module.exports =
           title: "Default Provider"
           description: "Choose your default build provider for `makensis`"
           type: "string"
-          enum: [
-            "(default)"
-            "build-makensis"
-            "build-makensis-wine"
-          ]
+          enum: buildProviders
           default: "(default)"
     toolbar:
       type: "object"
@@ -71,7 +72,7 @@ module.exports =
 
     # Register commands
     @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:setup-package-dependencies": => @setupPackageDeps()
-    if atom.config.get("#{meta.name}.enableToolbar") and atom.config.get("#{meta.name}.toolbar.showBuildTools")
+    if atom.config.get("#{meta.name}.toolbar.enableToolbar") and atom.config.get("#{meta.name}.toolbar.showBuildTools")
       @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile": => @buildCommand(false)
       @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile-strict": => @buildCommand(true)
       @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:create-build-file": => @buildFile()
@@ -232,6 +233,8 @@ module.exports =
       buildCommand = if isStrict then "MakeNSIS:compile-and-stop-at-warning" else "MakeNSIS:compile"
     else if defaultProvider is "build-makensis-wine" and atom.packages.loadedPackages["build-makensis-wine"]
       buildCommand = if isStrict then "MakeNSIS-on-wine:compile-and-stop-at-warning" else "MakeNSIS-on-wine:compile"
+    else if defaultProvider is "script" and atom.packages.loadedPackages["script"]
+      buildCommand = "script:run"
     else
       buildCommand = if isStrict then "NSIS:save-&-compile-strict" else "NSIS:save-&-compile"
 
