@@ -1,4 +1,4 @@
-# v0.13.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.12.0)
+# v0.13.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.13.0)
 
 - add support for `script` package
 - fix build buttons
