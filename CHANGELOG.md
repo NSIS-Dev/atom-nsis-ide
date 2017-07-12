@@ -1,3 +1,7 @@
+# v0.14.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.14.1)
+
+- fix `satisfyDependencies()` (this time for real!)
+
 # v0.14.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.14.0)
 
 - add button to *Show compiler flags*

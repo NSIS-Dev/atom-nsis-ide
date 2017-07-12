@@ -79,7 +79,7 @@ module.exports =
 
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
 
-    if atom.config.get("#{meta.name}.manageDependencies") and atom.inSafeMode is false
+    if atom.config.get("#{meta.name}.manageDependencies")
       @setupPackageDeps()
 
   deactivate: ->
