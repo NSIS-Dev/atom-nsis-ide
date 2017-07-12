@@ -204,6 +204,12 @@ module.exports =
           tooltip: "Show makensis version"
           iconset: "fa"
 
+        @toolBar.addButton
+          icon: "flag-checkered"
+          callback: "NSIS:show-compiler-flags"
+          tooltip: "Show compiler flags"
+          iconset: "fa"
+
         @toolBar.addSpacer()
 
   toggleToolbar: (getToolBar) ->
