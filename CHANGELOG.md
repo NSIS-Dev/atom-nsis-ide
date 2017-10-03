@@ -1,3 +1,9 @@
+# v0.15.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.15.0)
+
+- add metrics support
+- edit Gulp tasks
+- update `dependencies`
+
 # v0.14.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.14.1)
 
 - fix `satisfyDependencies()` (this time for real!)
