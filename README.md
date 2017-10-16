@@ -60,7 +60,7 @@ This package is largely a “meta package”. Other than adding adding a tool-ba
 **nsL Assembler**
 
 * [`language-nsl`](https://atom.io/packages/language-nsl) – grammar, snippets, build tool for [nsL Assembler](https://github.com/NSIS-Dev/nsl-assembler)
-* [`build-nsl`](https://atom.io/packages/language-nsl) – alternative build tools
+* [`build-nsl`](https://atom.io/packages/language-nsl) – alternative build tool with [linter](https://atom.io/packages/linter) support
 
 **Haskell**
 
