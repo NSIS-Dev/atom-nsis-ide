@@ -1,3 +1,11 @@
+# v0.16.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.16.1)
+
+- observe build tools to control state of `linter-makensis`
+
+# v0.16.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.16.0)
+
+- add linter plugin
+
 # v0.15.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.15.0)
 
 - add metrics support

@@ -77,6 +77,15 @@ module.exports =
       @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:compile-strict": => @buildCommand(true)
       @subscriptions.add atom.commands.add "atom-workspace", "NSIS-IDE:create-build-file": => @buildFile()
 
+    # Using build-makensis-* will disable linter plug-in to avoid conflicts
+    atom.config.onDidChange "#{meta.name}.building.defaultProvider", ({newValue, oldValue}) ->
+      if newValue.startsWith "build-makensis"
+        atom.notifications.addInfo("**#{meta.name}**: Disabling `linter-makensis` package", dismissable: false)
+        return atom.packages.disablePackage "linter-makensis"
+
+      atom.notifications.addInfo("**#{meta.name}**: Enabling `linter-makensis` package", dismissable: false)
+      atom.packages.enablePackage "linter-makensis"
+
     atom.config.onDidChange "#{meta.name}.toolbar.enableToolbar", ({isValue, wasValue}) => @toggleToolbar(isValue)
 
     @setupPackageDeps(true) if atom.config.get("#{meta.name}.manageDependencies")
