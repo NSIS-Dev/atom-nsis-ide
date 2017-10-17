@@ -38,6 +38,7 @@
     "language-nsis",
     "language-nsl",
     "linter",
+    "linter-makensis",
     "minimap",
     "minimap-linter",
     "minimap-selection",
@@ -59,7 +60,7 @@
   "devDependencies": {
     "babel-eslint": "^8.0.1",
     "coffeelint-stylish": "^0.1.2",
-    "eslint": "^4.8.0",
+    "eslint": "^4.9.0",
     "eslint-config-atom-build": "^4.0.0",
     "gulp": "github:gulpjs/gulp#4.0",
     "gulp-coffeelint": "^0.6.0",
