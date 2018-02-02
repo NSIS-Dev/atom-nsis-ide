@@ -1,12 +1,12 @@
 {
   "name": "nsis-ide",
-  "version": "0.16.2",
+  "version": "0.16.1",
   "description": "Adds IDE-like features for NSIS development in Atom",
   "license": "MIT OR GPL-2.0",
   "main": "./lib/nsis-ide",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/NSIS-Dev/atom-nsis-ide.git"
+    "url": "https://github.com/NSIS-Dev/atom-nsis-ide.git"
   },
   "keywords": [
     "nsis",
