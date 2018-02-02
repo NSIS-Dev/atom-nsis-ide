@@ -1,3 +1,7 @@
+# v0.16.2 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.16.2)
+
+- update Atom package dependencies
+
 # v0.16.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.16.1)
 
 - observe build tools to control state of `linter-makensis`
