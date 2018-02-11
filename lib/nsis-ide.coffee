@@ -212,6 +212,12 @@ module.exports =
           iconset: "fa"
 
         @toolBar.addButton
+          icon: "book"
+          callback: "NSIS:look-up-command-online"
+          tooltip: "Look up command online"
+          iconset: "fa"
+
+        @toolBar.addButton
           icon: "info-circle"
           callback: "NSIS:show-version"
           tooltip: "Show makensis version"
