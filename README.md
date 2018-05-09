@@ -75,6 +75,11 @@ Also included are several convenience packages, that are not primarily targeted 
 * [`set-syntax`](https://atom.io/packages/set-syntax)
 * [`browse`](https://atom.io/packages/browse)
 
+## Related
+
+- [node-makensis](https://www.npmjs.com/package/makensis) - Node wrapper for `makensis`
+- [vscode-nsis](https://marketplace.visualstudio.com/items?itemName=idleberg.nsis) - NSIS package for Visual Studio Code
+
 ## License
 
 This work is dual-licensed under [The MIT License](https://opensource.org/licenses/MIT) and the [GNU General Public License, version 2.0](https://opensource.org/licenses/GPL-2.0)
