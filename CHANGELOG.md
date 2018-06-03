@@ -1,3 +1,7 @@
+# v0.18.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.18.1)
+
+- update Atom package dependencies
+
 # v0.18.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.18.0)
 
 - add `hyperclick` provider
