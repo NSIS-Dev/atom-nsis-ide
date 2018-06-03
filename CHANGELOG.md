@@ -3,6 +3,7 @@
 - add `hyperclick` provider
 - rename lookup command
 - integrate `husky`
+- update dependencies
 
 # v0.17.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.17.0)
 
