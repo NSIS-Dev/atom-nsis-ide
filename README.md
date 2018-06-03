@@ -57,6 +57,7 @@ This package is largely a “meta package”. Other than adding adding a tool-ba
 * [`build-makensis`](https://atom.io/packages/build-makensis) – alternative build tool with [linter](https://atom.io/packages/linter) support
 * [`build-makensis-wine`](https://atom.io/packages/build-makensis-wine) – build on any [Wine](https://www.winehq.org/)-compatible platform
 * [`linter-makensis`](https://atom.io/packages/linter-makensis) – linter plug-in
+* [`hyperclick-makensis`](https://atom.io/packages/hyperclick-makensis) – hyperclick provider
 
 **nsL Assembler**
 
