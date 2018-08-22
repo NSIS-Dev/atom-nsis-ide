@@ -213,7 +213,7 @@ module.exports =
 
         @toolBar.addButton
           icon: "book"
-          callback: "NSIS:command-referencee"
+          callback: "NSIS:command-reference"
           tooltip: "Look up command online"
           iconset: "fa"
 
