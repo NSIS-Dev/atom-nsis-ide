@@ -98,11 +98,6 @@ module.exports =
   setupPackageDeps: (autoRun = falase) ->
     require("atom-package-deps").install(meta.name)
 
-    if autoRun is true
-      require("./ga").sendEvent "nsis-ide", "Satisfy Dependencies (auto)"
-    else
-      require("./ga").sendEvent "nsis-ide", "Satisfy Dependencies (manual)"
-
     for k, v of meta["package-deps"]
       if atom.packages.isPackageDisabled(v)
         console.log "Enabling package '#{v}'" if atom.inDevMode()
@@ -233,7 +228,6 @@ module.exports =
 
   toggleToolbar: (getToolBar) ->
     if @toolBar
-      require("./ga").sendEvent "nsis-ide", "Toggle Toolbar (disable)"
       @toolBar.removeItems()
       @toolBar = null
     else
@@ -244,7 +238,6 @@ module.exports =
           "Reload now": ->
             # Room for improvment?
             setTimeout ->
-              require("./ga").sendEvent "nsis-ide", "Toggle Toolbar (enable)"
               atom.reload()
             , 300
           "Cancel": ->
@@ -257,16 +250,12 @@ module.exports =
     defaultProvider = atom.config.get("#{meta.name}.building.defaultProvider")
 
     if defaultProvider is "build-makensis" and atom.packages.loadedPackages["build-makensis"]
-      require("./ga").sendEvent "nsis-ide", "Build (build-makensis)"
       buildCommand = if isStrict then "MakeNSIS:compile-and-stop-at-warning" else "MakeNSIS:compile"
     else if defaultProvider is "build-makensis-wine" and atom.packages.loadedPackages["build-makensis-wine"]
-      require("./ga").sendEvent "nsis-ide", "Build (build-makensis-wine)"
       buildCommand = if isStrict then "MakeNSIS-on-wine:compile-and-stop-at-warning" else "MakeNSIS-on-wine:compile"
     else if defaultProvider is "script" and atom.packages.loadedPackages["script"]
-      require("./ga").sendEvent "nsis-ide", "Build (script)"
       buildCommand = "script:run"
     else
-      require("./ga").sendEvent "nsis-ide", "Build (language-nsis)"
       buildCommand = if isStrict then "NSIS:save-&-compile-strict" else "NSIS:save-&-compile"
 
     atom.commands.dispatch atom.views.getView(editor), buildCommand
@@ -278,10 +267,8 @@ module.exports =
     defaultProvider = atom.config.get("#{meta.name}.building.defaultProvider")
 
     if defaultProvider is "build-makensis-wine" and atom.packages.loadedPackages["build-makensis-wine"]
-      require("./ga").sendEvent "nsis-ide", "Build File (Wine)"
       buildFile = "NSIS:create-.atom–build-file-for-wine"
     else
-      require("./ga").sendEvent "nsis-ide", "Build File (native)"
       buildFile = "NSIS:create-.atom–build-file"
 
     atom.commands.dispatch atom.views.getView(editor), buildFile
