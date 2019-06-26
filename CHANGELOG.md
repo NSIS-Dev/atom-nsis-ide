@@ -1,3 +1,8 @@
+# v0.19.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.19.0)
+
+- bundle with Webpack
+- update dependencies
+
 # v0.18.1 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.18.1)
 
 - update Atom package dependencies
