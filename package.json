@@ -55,11 +55,6 @@
     "tool-bar",
     "set-syntax"
   ],
-  "activationHooks": [
-    "language-nlf:grammar-used",
-    "language-nsis:grammar-used",
-    "language-nsl:grammar-used"
-  ],
   "consumedServices": {
     "tool-bar": {
       "versions": {
@@ -86,5 +81,10 @@
     "hooks": {
       "pre-commit": "npm run test"
     }
+  },
+  "apmInstallSource": {
+    "type": "git",
+    "source": "https://github.com/NSIS-Dev/atom-nsis-ide",
+    "sha": "009987c78761799b2db901d971e417ac9a868420"
   }
 }

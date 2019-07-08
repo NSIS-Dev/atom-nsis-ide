@@ -120,13 +120,13 @@ module.exports =
 
     if atom.config.get("#{meta.name}.toolbar.showBuildTools")
       @toolBar.addButton
-        icon: "dot-circle"
+        icon: "check"
         callback: "NSIS-IDE:compile"
         tooltip: "Compile"
         iconset: "fa"
 
       @toolBar.addButton
-        icon: "bullseye"
+        icon: "check-double"
         callback: "NSIS-IDE:compile-strict"
         tooltip: "Compile and stop at warnings"
         iconset: "fa"
