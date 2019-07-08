@@ -120,20 +120,20 @@ module.exports =
 
     if atom.config.get("#{meta.name}.toolbar.showBuildTools")
       @toolBar.addButton
-        icon: "paper-plane"
+        icon: "dot-circle"
         callback: "NSIS-IDE:compile"
         tooltip: "Compile"
         iconset: "fa"
 
       @toolBar.addButton
-        icon: "paper-plane-o"
+        icon: "bullseye"
         callback: "NSIS-IDE:compile-strict"
         tooltip: "Compile and stop at warnings"
         iconset: "fa"
 
       if atom.packages.loadedPackages["language-nsis"]
         @toolBar.addButton
-          icon: "download"
+          icon: "plus-square"
           callback: "NSIS-IDE:create-build-file"
           tooltip: "Create build file"
           iconset: "fa"
@@ -142,13 +142,13 @@ module.exports =
 
     if atom.config.get("#{meta.name}.toolbar.showFileButtons")
       @toolBar.addButton
-        icon: "folder-open-o"
+        icon: "folder-open"
         callback: "application:open"
         tooltip: "Open"
         iconset: "fa"
 
       @toolBar.addButton
-        icon: "floppy-o"
+        icon: "save"
         callback: "core:save"
         tooltip: "Save"
         iconset: "fa"
@@ -201,7 +201,7 @@ module.exports =
 
       if atom.packages.loadedPackages["language-nsis"]
         @toolBar.addButton
-          icon: "sliders"
+          icon: "sliders-h"
           callback: "NSIS:open-package-settings"
           tooltip: "Open Settings"
           iconset: "fa"
