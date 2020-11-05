@@ -22,10 +22,15 @@ Install `nsis-ide` from Atom's [Package Manager](http://flight-manual.atom.io/us
 
 Change to your Atom packages directory:
 
-```bash
-# Windows
-$ cd %USERPROFILE%\.atom\packages
+```powershell
+# Windows Powershell
+cd $Env:USERPROFILES\.atom\packages
 
+# Windows Command Prompt
+$ cd %USERPROFILE%\.atom\packages
+```
+
+```bash
 # Linux & macOS
 $ cd ~/.atom/packages/
 ```
