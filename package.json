@@ -31,29 +31,77 @@
     "atom": ">=1.12.0 <2.0.0"
   },
   "package-deps": [
-    "browse",
-    "build",
-    "build-makensis",
-    "build-makensis-wine",
-    "build-nsl",
-    "console-panel",
-    "edit-in-new-tab",
-    "logo-file-icons",
-    "haskell-nsis",
-    "hyperclick",
-    "hyperclick-nsis",
-    "language-ini",
-    "language-nsis",
-    "language-nsl",
-    "linter:2.0.0",
-    "linter-ui-default",
-    "linter-makensis",
-    "minimap",
-    "minimap-linter",
-    "minimap-selection",
-    "nsis-plugins",
-    "tool-bar",
-    "set-syntax"
+    {
+      "name": "browse",
+      "minimumVersion": "3.0.0"
+    },
+    {
+      "name": "build"
+    },
+    {
+      "name": "build-makensis"
+    },
+    {
+      "name": "build-makensis-wine"
+    },
+    {
+      "name": "build-nsl"
+    },
+    {
+      "name": "console-panel"
+    },
+    {
+      "name": "edit-in-new-tab"
+    },
+    {
+      "name": "logo-file-icons"
+    },
+    {
+      "name": "haskell-nsis"
+    },
+    {
+      "name": "hyperclick"
+    },
+    {
+      "name": "hyperclick-nsis"
+    },
+    {
+      "name": "language-ini"
+    },
+    {
+      "name": "language-nsis",
+      "minimumVersion": "8.0.0"
+    },
+    {
+      "name": "language-nsl"
+    },
+    {
+      "name": "linter:2.0.0"
+    },
+    {
+      "name": "linter-ui-default"
+    },
+    {
+      "name": "linter-makensis"
+    },
+    {
+      "name": "minimap"
+    },
+    {
+      "name": "minimap-linter"
+    },
+    {
+      "name": "minimap-selection"
+    },
+    {
+      "name": "nsis-plugins"
+    },
+    {
+      "name": "tool-bar"
+    },
+    {
+      "name": "set-syntax"
+    }
   ],
   "consumedServices": {
     "tool-bar": {
@@ -63,19 +111,19 @@
     }
   },
   "dependencies": {
-    "atom-package-deps": "^5.1.0"
+    "atom-package-deps": "^7.0.2"
   },
   "devDependencies": {
-    "coffee-loader": "^0.9.0",
+    "coffee-loader": "^1.0.1",
     "coffeelint-stylish": "^0.1.2",
     "coffeescript": "^2.4.1",
     "gulp": "^4.0.2",
     "gulp-coffeelint": "^0.6.0",
     "gulp-debug": "^4.0.0",
     "gulp-jsonlint": "^1.3.0",
-    "husky": "^2.3.0",
-    "webpack": "^4.35.0",
-    "webpack-cli": "^3.3.5"
+    "husky": "^4.3.0",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12"
   },
   "husky": {
     "hooks": {
