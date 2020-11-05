@@ -256,7 +256,7 @@ module.exports =
     else if defaultProvider is "script" and atom.packages.loadedPackages["script"]
       buildCommand = "script:run"
     else
-      buildCommand = if isStrict then "NSIS:save-&-compile-strict" else "NSIS:save-&-compile"
+      buildCommand = if isStrict then "NSIS:compile-strict" else "NSIS:compile"
 
     atom.commands.dispatch atom.views.getView(editor), buildCommand
 

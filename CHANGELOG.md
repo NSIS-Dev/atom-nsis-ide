@@ -1,3 +1,10 @@
+# v0.20.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.20.0)
+
+- breaking changes
+  - upgrade `language-nsis`
+  - upgrade `atom-package-deps`
+- update devDependencies
+
 # v0.19.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.19.0)
 
 - bundle with Webpack
