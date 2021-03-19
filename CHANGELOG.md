@@ -1,3 +1,8 @@
+# v0.21.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.21.0)
+
+- replace `build` package dependency
+- update dependencies
+
 # v0.20.0 [#](https://github.com/NSIS-Dev/atom-nsis-ide/releases/tag/v0.20.0)
 
 - breaking changes
