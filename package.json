@@ -36,7 +36,7 @@
       "minimumVersion": "3.0.0"
     },
     {
-      "name": "build"
+      "name": "buildium"
     },
     {
       "name": "build-makensis"
